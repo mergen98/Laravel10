@@ -15,6 +15,7 @@ class Role
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
+//        dd($request->user()->role,$role);
         if($request->user()->role !== $role) {
             return redirect('dashboard');
         }
