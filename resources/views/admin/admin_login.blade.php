@@ -63,7 +63,7 @@
 										@csrf
 										<div class="mb-3">
 											<label for="login" class="form-label">Email/Name/Phone</label>
-											<input type="text" name="login" class="form-control" id="login" placeholder="Email">
+											<input type="text" name="login" class="form-control" id="login" placeholder="Email" autocomplete="email">
 										</div>
 										<div class="mb-3">
 											<label for="userPassword" class="form-label">Password</label>
