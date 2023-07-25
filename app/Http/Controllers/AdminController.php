@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class AdminController extends Controller
 {
@@ -46,7 +45,7 @@ class AdminController extends Controller
         
         if ($request->photo) {
             $file = $request->file('photo');
-            @unlink(public_path('upload/admin_images/'.$data->photo));
+            @unlink(public_path('upload/admin_images/'.$data->photo));// replace with old image
             $filename = date('YmdHi').$file->getClientOriginalExtension();
             $file->move(public_path('upload/admin_images'), $filename);
             $data['photo'] = $filename;

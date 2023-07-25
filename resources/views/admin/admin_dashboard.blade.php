@@ -21,6 +21,9 @@
 	<!-- endinject -->
 
 	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="{{asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css')}}">
+	<!-- End plugin css for this page -->
+	<!-- Plugin css for this page -->
 	<link rel="stylesheet" href="{{asset('backend/assets/vendors/flatpickr/flatpickr.min.css')}}">
 	<!-- End plugin css for this page -->
 
@@ -102,5 +105,13 @@
     }
 	@endif
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{asset('backend/assets/js/code/code.js')}}"></script>
+<!-- Plugin js for this page -->
+<script src="{{asset('backend/assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
+<script src="{{asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js')}}"></script>
+<!-- End plugin js for this page -->
+<script src="{{asset('backend/assets/js/data-table.js')}}"></script>
 </body>
 </html>
