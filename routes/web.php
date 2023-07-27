@@ -50,6 +50,7 @@ Route::middleware(['auth','role:agent'])->group(function(){ // agent middleware
 Route::get('/admin/login',[\App\Http\Controllers\AdminController::class,'adminLogin'])->name('admin.login');
 
 Route::middleware(['auth','role:admin'])->group(function(){ // admin middleware
+    //Property
     Route::controller(\App\Http\Controllers\Backend\PropertyTypeController::class)->group(function(){
        Route::get('/all/type','AllType')->name('all.type');
        Route::get('/add/type','AddType')->name('add.type');
@@ -57,5 +58,14 @@ Route::middleware(['auth','role:admin'])->group(function(){ // admin middleware
        Route::get('/edit/type/{id}','EditType')->name('edit.type');
        Route::post('/update/type','UpdateType')->name('update.type');
        Route::get('/delete/type/{id}','DestroyType')->name('delete.type');
+    });
+    // Amenities
+    Route::controller(\App\Http\Controllers\Backend\AmenityController::class)->group(function(){
+       Route::get('/all/amenity','AllAmenity')->name('all.amenity');
+       Route::get('/add/amenity','AddAmenity')->name('add.amenity');
+       Route::post('/store/amenity','StoreAmenity')->name('store.amenity');
+       Route::get('/edit/amenity/{id}','EditAmenity')->name('edit.amenity');
+       Route::post('/update/amenity','UpdateAmenity')->name('update.amenity');
+       Route::get('/delete/amenity/{id}','DestroyAmenity')->name('delete.amenity');
     });
 });
