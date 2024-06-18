@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-//User Frontend All Routes
-Route::get('/',[UserController::class, 'index']);
+// User Frontend All Route
+Route::get('/', [UserController::class, 'Index']);
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,42 +38,33 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Admin Group Middleware
-Route::middleware(['auth','role:admin'])->group(function(){ // admin middleware
-    Route::get('/admin/dashboard',[\App\Http\Controllers\AdminController::class,'adminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/logout',[\App\Http\Controllers\AdminController::class,'adminLogout'])->name('admin.logout');
-    Route::get('/admin/profile',[\App\Http\Controllers\AdminController::class,'adminProfile'])->name('admin.profile');
-    Route::post('/admin/profile/store',[\App\Http\Controllers\AdminController::class,'adminProfileStore'])->name('admin.profile.store');
-    Route::get('/admin/change/password',[\App\Http\Controllers\AdminController::class,'adminChangePassword'])->name('admin.change.password');
-    Route::post('/admin/update/password',[\App\Http\Controllers\AdminController::class,'adminUpdatePassword'])->name('admin.update.password');
-    Route::post('/admin/update/password',[\App\Http\Controllers\AdminController::class,'adminUpdatePassword'])->name('admin.update.password');
-});
 
-// Agent Group Middleware
-Route::middleware(['auth','role:agent'])->group(function(){ // agent middleware
-    Route::get('/agent/dashboard',[\App\Http\Controllers\AgentController::class,'agentDashboard'])->name('agent.dashboard');
-});
+/// Admin Group Middleware
+Route::middleware(['auth','role:admin'])->group(function(){
+    
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    
+    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    
+    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+    
+    Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
+    
+    Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
+    
+    Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
+    
+    
+}); // End Group Admin Middleware
 
-// Property Type
-Route::get('/admin/login',[\App\Http\Controllers\AdminController::class,'adminLogin'])->name('admin.login');
 
-Route::middleware(['auth','role:admin'])->group(function(){ // admin middleware
-    //Property
-    Route::controller(\App\Http\Controllers\Backend\PropertyTypeController::class)->group(function(){
-       Route::get('/all/type','AllType')->name('all.type');
-       Route::get('/add/type','AddType')->name('add.type');
-       Route::post('/store/type','StoreType')->name('store.type');
-       Route::get('/edit/type/{id}','EditType')->name('edit.type');
-       Route::post('/update/type','UpdateType')->name('update.type');
-       Route::get('/delete/type/{id}','DestroyType')->name('delete.type');
-    });
-    // Amenities
-    Route::controller(\App\Http\Controllers\Backend\AmenityController::class)->group(function(){
-       Route::get('/all/amenity','AllAmenity')->name('all.amenity');
-       Route::get('/add/amenity','AddAmenity')->name('add.amenity');
-       Route::post('/store/amenity','StoreAmenity')->name('store.amenity');
-       Route::get('/edit/amenity/{id}','EditAmenity')->name('edit.amenity');
-       Route::post('/update/amenity','UpdateAmenity')->name('update.amenity');
-       Route::get('/delete/amenity/{id}','DestroyAmenity')->name('delete.amenity');
-    });
-});
+
+/// Agent Group Middleware
+Route::middleware(['auth','role:agent'])->group(function(){
+    
+    Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
+    
+}); // End Group Agent Middleware
+
+
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
